@@ -1,0 +1,16 @@
+HOJ 1520/POJ 2553  The Bottom of a Graph
+POJ 1236†Network†of†Schools (??) 
+HOJ 2741  The Busiest Man
+POJ 2186  Popular Cows
+POJ 1904  King's Quest (∫√Ã‚)
+SPOJ  51  Fake tournament
+SPOJ4644  Proving Equivalences
+POJ 2762†Going†from†u†to†v†or†from†v†to†u
+POJ 3160†Father†Christmas†flymouse
+
+HOJ 1007  SPF
+HOJ 1098  NetWork
+HOJ 1789  Electricity
+HOJ 2360  Redundant Paths
+POJ 2942  Knights of the Round Table
+POJ 3352  Road Construction

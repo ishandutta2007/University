@@ -1,0 +1,38 @@
+//递归求解，图用边集数组存
+【无向图、有向图中欧拉回路的求法】
+
+void dfs(int x)
+{
+    int y;
+    for (int p=hd[x]; p != -1; p=ed[p].next) 
+	if (!ed[p].vst) {
+        	y = ed[p].b;
+        	ed[p].vst = 1;
+        	ed[p ^ 1].vst = 1;     //如果是有向图则不要这句（代表的是反向边）
+        	dfs(y);
+        	res[v--] = y + 1;
+   	 }
+}
+
+
+//非递归求解
+void dfs()
+{
+    int x = 0, y, tp = 1; stk[0] = 0;
+    re(i, n) now[i] = hd[i];
+    bool ff;
+    while (tp) {
+        ff = 0;
+        for (int p=now[x]; p != -1; p=ed[p].next) 
+	if (!ed[p].vst) {
+            y = ed[p].b;
+            ed[p].vst = 1;
+            ed[p ^ 1].vst = 1;     //如果是有向图则不要这句（代表的是反向边）
+            now[x] = p; stk[tp++] = y; x = y; ff = 1; break;
+        }
+        if (!ff) {
+            res[v--] = x + 1;
+            x = stk[--tp - 1];
+        }
+    }
+}

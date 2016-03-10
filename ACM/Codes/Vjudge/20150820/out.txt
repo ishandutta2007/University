@@ -1,0 +1,15 @@
+x = 6, max = 10, lmax = 6, rmax = 10, key = 1, sum = 6, lson = 3, rson = 9
+x = 3, max = 8, lmax = 4, rmax = 8, key = -6, sum = 4, lson = 1, rson = 4
+x = 1, max = 2, lmax = 2, rmax = 2, key = 0, sum = 2, lson = 0, rson = 2
+x = 2, max = 2, lmax = 2, rmax = 2, key = 2, sum = 2, lson = 0, rson = 0
+x = 4, max = 8, lmax = 8, rmax = 8, key = 3, sum = 8, lson = 0, rson = 5
+x = 5, max = 5, lmax = 5, rmax = 5, key = 5, sum = 5, lson = 0, rson = 0
+x = 9, max = 9, lmax = 1, rmax = 9, key = 6, sum = 1, lson = 7, rson = 10
+x = 7, max = -3, lmax = -5, rmax = -3, key = -5, sum = -8, lson = 0, rson = 8
+x = 8, max = -3, lmax = -3, rmax = -3, key = -3, sum = -3, lson = 0, rson = 0
+x = 10, max = 3, lmax = 3, rmax = 3, key = 3, sum = 3, lson = 0, rson = 11
+x = 11, max = 0, lmax = 0, rmax = 0, key = 0, sum = 0, lson = 0, rson = 0
+-1
+10
+1
+10

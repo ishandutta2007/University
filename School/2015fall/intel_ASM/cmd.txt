@@ -1,0 +1,1 @@
+D:\VisualStudio\VC>cl C:\Users\PoorE\Desktop\intel\test.cpp /Ox /FaC:\Users\PoorE\Desktop\intel\test.asm /FAs /arch:IA32

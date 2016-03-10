@@ -1,0 +1,29 @@
+POJ 1611 The suspects
+POJ 2542 Ubiquitous Religions
+POJ 1456 Supermarket
+POJ 1733 Parity game
+hdu 3038 How Many Answers Are Wrong
+POJ 1417 True Liars(难)
+POJ 2912 Rochambeau(难)
+ZOJ 3261 Connections in Galaxy War
+poj 1861 Network
+
+poj 1182 食物链
+poj 1308 Is It A Tree?
+poj 2524 Ubiquitous Religions(并查集)
+hdu 1232【畅通工程 (找集合个数)】 
+
+hdu 1213【How Many Tables (找集合个数)】,和hdu1232一样 
+
+hdu 1856【More is better (找最大秩的集合)】 
+
+hdu 1272【小希的迷宫 (判环、连通性)】 
+
+hdu 1198【Farm Irrigation (找集合个数)】 
+
+
+
+
+
+poj 2236
+poj 1308

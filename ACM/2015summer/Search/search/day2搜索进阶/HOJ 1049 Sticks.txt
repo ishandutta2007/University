@@ -1,0 +1,99 @@
+#include <iostream>  //用递归写的DFS。注意体会各剪枝的效果
+#include <cstdio>
+#include <algorithm>
+#include <memory.h>
+using namespace std;
+int sticks[65];
+int sum;
+int s;
+int slen;
+int num;
+int snum;
+int l;
+bool mark[65];
+bool cmp(int a,int b)
+{
+    return a>b;
+}
+bool dfs(int s,int slen,int i);
+int main()
+{
+
+    //  int sticks[65];
+    while(scanf("%d",&snum)&&snum)
+    {
+        sum=0;
+        s=0;
+        slen=0;
+        //    memset(mark,0,sizeof(mark));
+        for(int i=0; i<snum; i++)
+        {
+            scanf("%d",&sticks[i]);
+            sum+=sticks[i];
+        }
+        sort(sticks,sticks+snum,cmp);
+
+        for(l=sticks[0]; l<=sum; l++)
+        {
+            if(sum%l==0)
+            {
+                num=sum/l;
+                memset(mark,0,sizeof(mark));
+                if(dfs(1,0,-1))
+                {
+                    printf("%d\n",l);
+                    break;
+                }
+            }
+            else continue;
+        }
+
+
+    }
+    return 0;
+}
+bool dfs(int s,int slen,int pos)
+{
+    if(s==num)return true;
+    bool sign = (slen == 0?true:false);
+    for(int i=pos+1; i<snum; i++)
+    {
+        if(mark[i]==true)continue;
+        if(slen+sticks[i]==l)
+        {
+            mark[i]=true;
+            if(dfs(s+1,0,-1))
+            {
+                return true;
+            }
+            else
+            {
+                mark[i]=false;
+                return false;
+            }
+
+        }
+        else if(slen+sticks[i]<l)
+        {
+            mark[i]=true;
+
+            if(dfs(s,slen+sticks[i],i))return true;
+            else
+            {
+                mark[i]=false;
+                if(sign)return false;                   // 在刚开始搜索组成一支新的长为 L 的木棍时，我们总是以当前最长的,未被使用的,木棍开始，
+                 			                //    如果搜索不成功，那么以比它短的开始
+                                                        //     这时也一定不能取得全局的成功。因为每一支题目给出的木棍
+                                                        //    都要被用到。
+                                                        //     如果，有
+                                                        //        4
+                                                        //         5 4 4 3 2
+                                                        //       想拼成长为 6 的木棍，那么从 5 开始， 但是显然没有能与 5
+                                                        //      一起拼成 6 的，那么我就没必要去尝试从 4 开始的，因为
+                                                        //      最终 5 一定会被遗弃。在拼第 2 3 ... 支木棍时，一样。
+          //      while(sticks[i+1]==sticks[i])i++;
+            }
+        }
+    }
+    return false;
+}

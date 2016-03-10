@@ -1,0 +1,99 @@
+//图使用边集数组存储（数组模拟链表）
+
+#include<cstdio>
+#include<cstring>
+#include<queue>
+#include<stack>
+#include<iostream>
+#include<cmath>
+using namespace std;
+#define maxn 1000
+int head[maxn];
+int cnt;
+struct eg
+{
+	int u,next;
+	int w;
+}edge[maxn*maxn*2];
+void add(int u,int v,int w)
+{
+	edge[cnt].u=u;
+	edge[cnt].w=w;
+	edge[cnt].next=head[v];
+	head[v]=cnt++;
+}
+int n;
+int ve[maxn];
+int vl[maxn];
+int ind[maxn];
+stack<int> T;
+void ini()
+{
+	memset(head,-1,sizeof(head));
+	cnt=0;
+	while(!T.empty())T.pop();
+	memset(edge,0,sizeof(edge));
+	memset(ind,0,sizeof(ind));
+	memset(ve,0,sizeof(ve));
+	memset(vl,0,sizeof(vl));
+}
+void topo()	//拓扑排序
+{
+	stack<int> s;
+	while(!s.empty())s.pop();
+	int cnt=0;
+	for(int i=0;i<n;i++)
+		if(ind[i]==0){
+			s.push(i);break;
+		}
+	while(!s.empty()){	//拓扑排序+最早开始时间
+		int tmp=s.top();
+		T.push(tmp);
+		for(int k=head[tmp];~k;k=edge[k].next){
+			int i=edge[k].u;
+			if(--ind[i]==0)
+				s.push(i);
+			if(ve[tmp]+edge[k].w>ve[i])
+				ve[i]=edge[k].w+ve[tmp];
+
+		}
+	}
+	if(cnt<n){
+		printf("circle");
+		return;
+	}
+}
+void getCriticalPath()	//求最晚开始时间
+{
+	topo();
+	while(!T.empty()){
+		int j=T.top();T.pop();
+		for(int p=head[j];~p;p=edge[p].next){
+			int k=edge[p].u;
+			if(vl[k]-edge[p].w<vl[j])
+				vl[j]=vl[k]-edge[p].w;
+		}
+	}
+	for(int i=0;i<n;i++){
+		for(int p=head[i];~p;p=edge[p].next){
+			int k=edge[p].u;
+			if(ve[k]==vl[k]-edge[p].w)
+				printf("%d %d %d\n",i,k,dege[p].w);
+		}
+	}
+}
+int main()
+{
+	int m;
+	while(~scanf("%d%d",&n,&m)){	//图的点数  边数
+		ini();
+		for(int i=0;i<m;i++){
+			int a,b,w;
+			scanf("%d%d%d",&a,&b,&w);  //起点、终点、边权
+			ind[b]++;
+			add(a,b,w);
+		}
+		getCriticalPath();
+	}
+	return 0;
+}

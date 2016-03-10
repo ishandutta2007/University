@@ -1,0 +1,37 @@
+不要求全部做完。。。
+
+大数：
+HOJ 1013
+HOJ 1368
+HOJ 1985
+POJ 1001
+
+二分：
+入门题：
+sgu 154 Telecasting station
+CF 287B http://codeforces.com/problemset/problem/287/B
+CF 279B. Books http://codeforces.com/problemset/problem/279/B
+HOJ 2651 http://acm.hit.edu.cn/hoj/problem/view?id=2651
+提高题：
+sgu 111 Very simple problem
+1.hoj 2278 IP Filtering
+2.hoj 2608 Assemble
+3. hoj 1604 Cable Master
+4. HOJ 2278
+5. HOJ 2160
+以上还不够的可以选择过的人数比较多的题目做做：
+http://codeforces.com/problemset/tags/binary%20search
+
+
+三分：学习资料：http://www.cnblogs.com/newpanderking/archive/2011/08/25/2153777.html
+基础：
+HDU 3714 Error Curves
+SGU 114 Telecasting station
+三分例子：编程之美 题目地址：http://msbop.openjudge.cn/bop2013/R1b_C/
+说明：http://www.cnblogs.com/yejinru/archive/2013/04/14/3020603.html
+
+提高：
+POJ 3737 UmBasketella
+ZOJ 3203 Light Bulb
+HDU 3756 Dome of Circus
+CF 8D

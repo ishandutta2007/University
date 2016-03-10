@@ -1,0 +1,20 @@
+1030 Labyrinth
+1049 Sticks 剪枝经典 强烈推荐。
+	具体解题报告另见 sticks 经典剪枝.doc 原作者不可考
+	可以自行尝试哪些剪枝是必要的，哪些是效率不高的，体会优化的效果。
+	还可以搜网上其它心得，绝对有意义的题。
+1075 The Castle 
+1103 Cat and Mouse
+1140 The Game
+1455 The Settlers of Catan
+1639 Image Perimeters
+1678 Knockout Tournament
+1908 Party Lamp
+1956 Square
+1974 Matrix
+2013 Turn Over Turn Over
+2027 Jill's Tour Paths
+2120 Is It A Tree?
+2298 Basic wall maze
+2643 Bi-image
+2666 Average Distance
