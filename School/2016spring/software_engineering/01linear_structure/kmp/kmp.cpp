@@ -44,3 +44,20 @@ int kmp(char* src, char* substring)
 	return ans;
 }
 
+
+int main()
+{
+	cout << "kmp algorithm" << endl;
+	cout << "please input two strings in two lines" << endl;
+	cout << "the first be the source string, and the second be the substring" << endl;
+	
+	scanf("%s", &src);
+	scanf("%s", &substring);
+	get_nxt(substring);
+	kmp(src, substring);
+
+
+	cout << "thanks for using" << endl;
+
+	return 0;
+}
