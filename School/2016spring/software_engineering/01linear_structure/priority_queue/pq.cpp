@@ -1,3 +1,12 @@
+/*
+ *	void init(vector<int>)
+ *	void heap_adjust(int)
+ *	void push(int)
+ *	void pop(void)
+ *	void clear(void)
+ *	void show(void)
+ */
+
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -79,15 +88,49 @@ public:
 	}
 }pq;
 
-
 int main()
 {
-	vector<int> vi;
-	for(int i = 0; i < 10; i++)
+	cout << "there are 5 operations" << endl;
+	cout << "1.initialize a heap with integers" << endl;
+	cout << "2.insert an integer" << endl;
+	cout << "3.pop an integer" << endl;
+	cout << "4.show the largest integer" << endl;
+	cout << "5.quit" << endl;
+
+	int cmd;
+	while(true)
 	{
-		vi.push_back(rand() % 11);
+		cin >> cmd;
+		if(cmd == 1)
+		{
+			vector<int> vi;
+			for(int i = 0; i < 10; i++)
+			{
+				vi.push_back(rand() % 11);
+			}
+			pq.init(vi);
+			pq.show();
+		}
+		else if(cmd == 2)
+		{
+			int tmp;
+			cin >> tmp;
+			pq.push(tmp);
+			pq.show();
+		}
+		else if(cmd == 3)
+		{
+			cout << "pop up " << pq.top() << endl;
+			pq.pop();
+		}
+		else if(cmd == 4)
+		{
+			cout << "the top is " << pq.top() << endl;
+		}
+		else if(cmd == 5)
+			break;
 	}
-	pq.init(vi);
-	pq.show();
+
+
 	return 0;
 }
