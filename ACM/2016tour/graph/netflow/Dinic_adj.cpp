@@ -10,7 +10,7 @@ struct Edge
 }e[maxn*30];
 
 int G[maxn], nxt[maxn*30], layer[maxn], cur[maxn];
-int n, m, st, ed, tot; 	//源点st， 汇点ed, 点数n
+int n, st, ed, tot; 	//源点st， 汇点ed, 点数n
 
 void adde1(int a, int b, int val)
 {
@@ -88,7 +88,7 @@ int dinic()
 }
 int main()
 {
-    int i,a,b,val;
+    int i,a,b,val,m;
     while(~scanf("%d%d",&n,&m))
     {
         tot = 0;
