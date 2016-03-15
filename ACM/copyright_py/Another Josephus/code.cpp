@@ -8,6 +8,7 @@ int f[1000200];
 int main()
 {
 	int T;
+	freopen("data.in", "r", stdin);
 	scanf("%d", &T);
 	int n, a[2];
 	while(T--)

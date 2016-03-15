@@ -42,6 +42,7 @@ long long calans(int mask)
 int main()
 {
 	int T;
+	freopen("data.in", "r", stdin);
 	scanf("%d", &T);
 	while(T--)
 	{
