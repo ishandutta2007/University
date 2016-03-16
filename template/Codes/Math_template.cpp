@@ -242,7 +242,7 @@ LL mega_mod(int n)
 LL CRT(LL *a, LL *m, int n)
 //中国剩余定理
 //x ≡ a[i] (mod m[i])
-//m[i] is prime
+//m[i] is coprime
 {
 	LL M = 1, Mi, x0, y0, d, ret = 0;
 	for(int i = 0; i < n; i++)

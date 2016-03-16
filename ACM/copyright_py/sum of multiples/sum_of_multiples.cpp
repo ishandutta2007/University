@@ -29,6 +29,7 @@ long long calans(int mask)
 		if (bit) {
 			tmp = lcm(tmp, a[i]);
 			cnt += bit;
+			if (tmp > n) return 0;
 		}
 	}
 	if(tmp > n) return 0;
