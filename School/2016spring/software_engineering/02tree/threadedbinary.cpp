@@ -10,6 +10,8 @@ struct Node
 	void show()
 	{
 		cout << "data = " << data  << endl;
+		// if(lson != NULL) cout << "lson = " << lson->data << endl;
+		// if(rson != NULL) cout << "rson = " << rson->data << endl;
 	}
 };
 
@@ -18,8 +20,6 @@ Node *pre;
 void thread_LDR(Node *now)
 {
 	if(now == NULL) return;
-	// now->show();
-	// system("pause");
 	thread_LDR(now->lson);
 	if(pre != NULL && pre->rson == NULL) {
 		pre->rf = 1;
@@ -31,6 +31,42 @@ void thread_LDR(Node *now)
 	}
 	pre = now;
 	thread_LDR(now->rson);
+}
+void thread_DLR(Node *now)
+{
+	if(now == NULL) return;
+	// now->show();
+	// system("pause");
+	if(pre != NULL && pre->rson == NULL)
+	{
+		pre->rf = 1;
+		pre->rson = now;
+	}
+	if(now->lson == NULL)
+	{
+		now->lf = 1;
+		now->lson = pre;
+	}
+	pre = now;
+	if(now->lf == 0) thread_DLR(now->lson);
+	if(now->rf == 0) thread_DLR(now->rson);
+}
+void thread_LRD(Node *now)
+{
+	if(now == NULL) return;
+	if(now->lf == 0) thread_LRD(now->lson);
+	if(now->rf == 0) thread_LRD(now->rson);
+	if(pre != NULL && pre->rson == NULL)
+	{
+		pre->rf = 1;
+		pre->rson = now;
+	}
+	if(now->lson == NULL)
+	{
+		now->lf = 1;
+		now->lson = pre;
+	}
+	pre = now;
 }
 
 void show_LDR(Node *now)
@@ -61,7 +97,7 @@ void init(Node *now)
 
 
 
-void show_thread(Node *root)
+void show_thread_LDR(Node *root)
 {
 	Node *now = root;
 	while(now->lf == 0) now = now->lson;
@@ -79,6 +115,20 @@ void show_thread(Node *root)
 	}
 }
 
+void show_thread_DLR(Node *root)
+{
+	Node *now = root;
+	while(now != NULL)
+	{
+		now->show();
+		// system("pause");
+		if(now->lf == 0)
+			now = now->lson;
+		else
+			now = now->rson;
+	}
+}
+
 
 int main()
 {
@@ -89,10 +139,11 @@ int main()
 	show_LDR(root);
 
 	pre = NULL;
-	thread_LDR(root);
+	// thread_LDR(root);
+	thread_LRD(root);
+	// thread_DLR(root);
 	cout << "==================" << endl;
-	show_thread(root);
-
+	show_thread_DLR(root);
 	return 0;
 }
 
