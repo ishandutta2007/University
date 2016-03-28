@@ -9,6 +9,7 @@
  *	ext_GCD
  *	筛法求素数
  *	slow_mul
+ *	linear_mod_equation 一元线性方程组求解
  *	pow_mod
  *	Lucas Lehmer 判定梅森素数
  *	miller robbin 素数判定
@@ -62,17 +63,27 @@ LL gcd(LL M,LL N)
 void EXT_GCD(LL a, LL b, LL &d, LL &x, LL &y)
 //a , b 任意
 {
-	 if(!b) {d = a, x = 1, y = 0;}
-	 else {EXT_GCD(b, a % b, d, y, x), y -= x * (a / b);}
+	if(!b) {d = a, x = 1, y = 0;}
+	else {EXT_GCD(b, a % b, d, y, x), y -= x * (a / b);}
 }
 
-LL inv(LL a, LL c)
+//递归求逆元
+//p, x 互质
+LL inv(LL x, LL m)
+{
+	if (x == 1) return x;
+	return inv(m % x, m)*(m - m / x) % m;
+}
+
+
+ll inv(LL a, LL c)
 // 用扩展欧几里得求逆元
 // 要求 a, c 互质
+// 如果没有逆元返回 -1
 {
 	LL d, x, y;
 	EXT_GCD(a, c, d, x, y);
-	return (x + c) % c;
+	return d == 1 ? (x + c) % c : -1;
 }
 LL ext_gcd(LL a, LL b, LL& x, LL& y)
 // a >= 0, b > 0
@@ -211,9 +222,27 @@ void calc(LL n,LL c=240)
 }
 
 
+vector<LL> linear_mod_equation(LL a, LL b, LL n)
+//线性方程求解
+//ax = b (mod n)
+{
+    LL x, y, d;
+    vector<LL> sol;
+    sol.clear();
+    EXT_GCD(a, n, d, x, y);
+    if( b%d ) d = 0;
+    else
+    {
+        sol.push_back(x * (b/d) % n);
+        for (int i = 1; i < d; i++)
+            sol.push_back((sol[i-1] + n/d + n) % n);
+    }
+    return sol;
+}
 LL mega_mod(int n)
 //解 n 个一元线性同于方程组
 //x ≡ r (mod a)
+//求x
 {
 	LL a1, a2, r1, r2, d, c, x, y, x0,s;
 	bool flag = true;
@@ -258,7 +287,7 @@ LL CRT(LL *a, LL *m, int n)
 	return ret;
 }
 
-
+//欧拉函数
 LL calphi(LL n)
 {
 	LL res = n;
@@ -272,7 +301,7 @@ LL calphi(LL n)
 	return res;
 }
 
-
+//欧拉函数预处理
 int phi[maxn];
 void getpthi(int n)
 {
@@ -315,17 +344,18 @@ void splitint()
 }
 
 //Stirling N的阶乘的长度
-const int PI=3.1415926;
+const double PI=3.1415926;
 int main()
 {
-    int t,n,a;
-    while(scanf("%d",&n)!=EOF)
-    {
-        a=(int)((0.5*log(2*PI*n)+n*log(n)-n)/log(10));
-        printf("%d\n",a+1);
-    }
-    return 0;
+	int t,n,a;
+	while(scanf("%d",&n)!=EOF)
+	{
+		a=(int)((0.5*log(2*PI*n)+n*log(n)-n)/log(10));
+		printf("%d\n",a+1);
+	}
+	return 0;
 }
+
 
 
 /*
