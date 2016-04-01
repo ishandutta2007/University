@@ -4,6 +4,7 @@ using namespace std;
 //Wythoff Game
 //A first
 //B second
+//当 n 过大时需要用高精度处理，和精确的黄金比例数
 int main()
 {
     int T;

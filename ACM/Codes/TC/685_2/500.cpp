@@ -10,7 +10,6 @@ public:
 	int ans;
 	int vis[40];
 	vector<string> c1, c2;
-
 	void dfs(int u, int now1, int now2)
 	{
 		if(u == 1)
@@ -19,7 +18,6 @@ public:
 				ans = now1 * now2;
 			return;
 		}
-
 		if(now1 * now2 > ans)
 			return;
 		for (int i = 0; i < n; i++)if(c1[u][i] != '.' && vis[i] == 0)
@@ -29,9 +27,6 @@ public:
 			vis[i] = 0;
 		}
 	}
-
-
-
 	int minimalCost(vector <string> weight1, vector <string> weight2)
 	{
 		n = weight1.size();
@@ -42,5 +37,4 @@ public:
 		dfs(0, 0, 0);
 		return ans == 0x7fffffff? -1 : ans;
 	}
-
 };
