@@ -2,4 +2,5 @@
 *.exe
 *.o
 
-
+#ignore contents in .idea
+School/2016spring/jisuanfangfa/.idea/*
