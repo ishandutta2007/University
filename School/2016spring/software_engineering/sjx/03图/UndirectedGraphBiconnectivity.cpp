@@ -102,10 +102,10 @@ void dfsWithoutBridge(int i)
 
 int main()
 {
-#ifndef ONLINE_JUDGE
-    freopen("UndirectedGraphBiconnectivity.in", "r", stdin);
+// #ifndef ONLINE_JUDGE
+    // freopen("UndirectedGraphBiconnectivity.in", "r", stdin);
     //freopen("out.txt", "w", stdout);
-#endif
+// #endif
 
     int Tc = 0;
     while (scanf("%d%d", &V, &E) > 0)
