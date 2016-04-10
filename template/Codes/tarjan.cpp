@@ -8,7 +8,6 @@
 #include "vector"
 #define maxn 100020
 using namespace std;
-
 vector<int>v[maxn];
 bool instack[maxn];
 int dfn[maxn], low[maxn];

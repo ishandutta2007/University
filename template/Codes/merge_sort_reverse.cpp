@@ -5,8 +5,6 @@ using namespace std;
 
 int arr[1000200], tarr[1000200];
 int cnt;
-
-
 void merge(int low, int mid, int high)
 {
 	int i, j, k;
