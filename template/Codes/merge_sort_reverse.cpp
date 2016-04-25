@@ -1,8 +1,5 @@
 #include <bits/stdc++.h>
-
 using namespace std;
-
-
 int arr[1000200], tarr[1000200];
 int cnt;
 void merge(int low, int mid, int high)
@@ -24,10 +21,6 @@ void merge(int low, int mid, int high)
 	for (k = 0; low <= high; low++, k++)
 		arr[low] = tarr[k];
 }
-
-
-
-
 void mergesort(int low, int high)
 {
 	if(low == high) return;
@@ -36,23 +29,14 @@ void mergesort(int low, int high)
 	mergesort(mid + 1, high);
 	merge(low, mid, high);
 }
-
-
-
-
 int main()
 {
-
 	int n;
 	scanf("%d", &n);
 	for (int i = 0; i < n; i++)
 		scanf("%d", &arr[i]);
-
 	cnt = 0;
 	mergesort(0, n-1);
-
 	printf("%d\n", cnt);
-
-
 	return 0;
 }

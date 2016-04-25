@@ -41,7 +41,7 @@ const int MOD = 1e9+7;
 LL GCD(LL a, LL b)
 //递归
 {
-	if(a > b) swap(a, b);
+	if(a < b) swap(a, b);
 	LL r = a % b;
 	if(r == 0) return b;
 	return GCD(b, r);
