@@ -7,3 +7,9 @@
 */__pycache__/
 #ignore contents in .idea
 School/2016spring/jisuanfangfa/.idea/*
+
+
+#ignore all *.in and *.out
+*.in
+*.out
+
