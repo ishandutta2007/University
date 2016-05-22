@@ -1,0 +1,7 @@
+6
+1 xiaoyu 88 91
+2 xiaomaoying 91 80
+3 yiming 63 40
+4 dakaiwei 97 90
+5 youren 90 61
+6 xingxing 79 74

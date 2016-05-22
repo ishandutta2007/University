@@ -25,7 +25,6 @@ void addedge(int u, int v, int c)
 	// edges.push_back(Edge(v,u,c));
 }
 
-
 bool bellmanford(int s)
 {
 	memset(dist, 0x3f, sizeof(dist));
@@ -53,10 +52,6 @@ bool bellmanford(int s)
 	}
 	return true;
 }
-
-
-
-
 
 int main()
 {

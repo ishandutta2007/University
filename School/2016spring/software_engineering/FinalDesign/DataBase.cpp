@@ -1,0 +1,204 @@
+#include <bits/stdc++.h>
+#include "AVL.cpp"
+
+using namespace std;
+
+char str1[100], str2[100];
+int Id;
+const int DATA_WIDTH = 7;
+AVL::Node *ptr;
+
+AVL avl;
+
+int tot;
+int lastid, lastpos;
+
+
+void creatAVL()
+{
+  FILE *fp = fopen("a.data", "r");
+  int id;
+  int pos = 0;
+  while(fscanf(fp, "%d %s %s", &id, str1, str2) == 3)
+  {
+    avl.insert(avl.root, id, pos++);
+  }
+  fclose(fp);
+}
+
+void saveAVL()
+{
+  FILE *fp = fopen("avl.data", "w");
+  int tp = 0, tid = -1;
+  fprintf(fp, "%d\n", tot);
+  avl.save(avl.root, fp);
+  printf("avl saved into avl.data\n");
+  fclose(fp);
+}
+
+void loadAVL()
+{
+  FILE *fp = fopen("avl.data", "r");
+  fscanf(fp, "%d", &tot);
+  int tpos = -1, tid = 0;
+  avl.load(avl.root, fp, tpos, tid);
+  printf("load data successful!!\n");
+  lastid = tid;
+  printf("last id = %d\n", tid);
+  fclose(fp);
+}
+
+int readById()
+{
+  int id;
+  printf("input the id : ");
+  scanf("%d", &id);
+  ptr = avl.search(avl.root, id);
+  return ptr == NULL? -1:ptr->pos;
+}
+
+void printData(int pos, FILE *fp)
+{
+  fseek(fp, pos * DATA_WIDTH, 0);
+  fscanf(fp, "%d %s %s", &Id, str1, str2);
+  printf("%d %s %s\n", Id, str1, str2);
+}
+int searchdata()
+{
+  FILE *fp = fopen("a.data", "r");
+  int pos =  readById();
+  if (pos == -1)
+  {
+    printf("no data found\n");
+    return -1;
+  }
+  else
+  {
+    printf("data found!\n");
+    printData(pos, fp);
+  }
+  fclose(fp);
+  return pos;
+}
+
+void insertdata()
+{
+  printf("input data\n");
+  FILE *fp = fopen("a.data", "a");
+  scanf("%d %s %s", &Id, str1, str2);
+  fprintf(fp, "%d %s %s\n", Id, str1, str2);
+  avl.insert(avl.root, Id, tot++);
+  printf("Insert data successful\n");
+}
+
+void deletedata()
+{
+  int delpos;
+  delpos = searchdata();
+  if (delpos == -1) return;
+
+  printf("Sorry , the delete operation is not completed yet!!\n");
+  
+  // find id of the lastpos;
+
+}
+
+void showData(AVL::Node *&now, FILE *fp)
+{
+  if (now == NULL) return;
+  showData(now->lson, fp);
+  printData(now->pos, fp);
+  showData(now->rson, fp);
+}
+
+void DBoperation()
+{
+  char cmd[10];
+  while (true)
+  {
+    printf("input 1 for search\n");
+    printf("input 2 for insert\n");
+    printf("input 3 for delete\n");
+    printf("input 4 for display\n");
+    printf("input 0 for quit\n");
+    scanf("%s", cmd);
+    if (cmd[0] == '1')
+    {
+      searchdata();
+    }
+    else if (cmd[0] == '2')
+    {
+      insertdata();
+    }
+    else if (cmd[0] == '3')
+    {
+      deletedata();
+    }
+    else if (cmd[0] == '4')
+    {
+      FILE *fp = fopen("a.data", "r");
+      showData(avl.root, fp);
+      fclose(fp);
+    }
+    else if (cmd[0] == '0')
+      break;
+  }
+
+
+  /*
+  FILE *fp = fopen("a.data", "r");
+  int pos =  readById();
+  if (pos == -1)
+  {
+    printf("no data found\n");
+    return;
+  }
+  else
+  {
+    fseek(fp, pos * DATA_WIDTH, 0);
+    fscanf(fp, "%d %s %s", &Id, str1, str2);
+    printf("data found!\n");
+    printf("%d %s %s", Id, str1, str2);
+  }
+  */
+}
+
+void initData()
+{
+  FILE *fp = fopen("a.data", "w");
+  printf("Input the total numbers of data\n");
+  scanf("%d", &tot);
+  for (int i = 0; i < tot; i++)
+  {
+    scanf("%d %s %s", &Id, str1, str2);
+    fprintf(fp, "%d %s %s\n", Id, str1, str2); 
+  }
+  fclose(fp);
+  lastid = Id;
+  printf("init data successful!!\n");
+}
+
+
+
+int main()
+{
+  char cmd[10];
+  printf("input 1 for input data\n");
+  printf("input 2 for load data\n");
+  scanf("%s", cmd);
+  if ( cmd[0] == '1')
+  {
+    initData();
+    creatAVL();
+  }
+  else if (cmd[0] == '2')
+  {
+    loadAVL();
+  }
+  avl.show(avl.root);
+  DBoperation();
+  // saveAVL to avl.data;
+  saveAVL();
+  return 0;
+}
+

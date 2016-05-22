@@ -22,7 +22,7 @@ void output(const char* hint)
     {
         printf("%d ", B[i]);
         if (B[i] < B[i - 1])
-            cout << "Fuck\n";
+            cout << "Unsorted!!!\n";
     }
     printf("\n");
 }
@@ -62,14 +62,14 @@ void BucketSort()
     output("BucketSort");
 }
 
-void input2()
+void input()
 {
     scanf("%d", &N);
     for (int i = 1; i <= N; i++)
         scanf("%d", A + i);
 }
 
-void datamaker2()
+void datamaker()
 {
     freopen("in.txt", "w", stdout);
 
@@ -84,12 +84,9 @@ int main()
 {
     srand(time(0));
     //datamaker();
-    //datamaker2();
-
     freopen("in.txt", "r", stdin);
     freopen("out.txt", "w", stdout);
-
-    input2();
+    input();
     CountSort();
     BucketSort();
 

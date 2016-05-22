@@ -12,6 +12,3 @@ do {
 		cout << a[i];
 	cout << endl;
 } while(next_permutation(a, a + len));
-
-
-
