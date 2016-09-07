@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+const int maxn = 1020;
+
+set<int> path;
+int vis[maxn]. bff[maxn];
+
+void dfs(int p)
+{
+  path.insert(p);
+
+
+}
+
+int main()
+{
+  int T;
+  scanf("%d", &T);
+  for (int ka = 1; ka <= T; ka++)
+  {
+    scanf("%d", &n);
+    for (int i = 1; i <= n; i++)
+      scanf("%d", &bff[i]);
+    memset(vis, 0, sizeof (vis));
+    int ans = 0;
+    for (int i = 1; i <= n; i++) if (!vis[i])
+    {
+      path.clear();
+      dfs(p);
+    }
+    printf("Case #%d: %d\n", ka, ans);
+  }
+  return 0;
+}

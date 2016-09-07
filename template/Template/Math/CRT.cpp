@@ -10,7 +10,10 @@ LL CRT(LL *a, LL *m, int n)
   {
     Mi = M/m[i];
     EXT_GCD(Mi, m[i], d, x0, y0);
-    ret = (ret+Mi*x0*a[i]) % M;
+    LL tmp = slow_mul(Mi, x0, M);
+    tmp = slow_mul(tmp, a[i], M);
+    ret = (ret + tmp) % M;
+    //ret = (ret+Mi*x0*a[i]) % M;
   }
   if(ret < 0)
     ret += M;

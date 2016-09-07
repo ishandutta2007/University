@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+typedef long long ll;
+int SZ;
+int oo;
+const int maxn = 50;
+
+struct matrix {
+  ll m[maxn][maxn];
+  matrix() {
+    cout << "mem" << endl;
+    memset(m, 0, sizeof(m));
+    cout << sizeof(m)/1024 << endl;
+    cout << "mem" << endl;
+  }
+  matrix(int x) {
+    memset(m, 0, sizeof(m));
+    for (int i = 0; i < SZ; i++) m[i][i] = x;
+  }
+  void clear() {
+    memset(m, 0, sizeof(m));
+  }
+  friend matrix operator *(matrix a, matrix b) {
+    matrix c;
+    for (int k = 0; k < SZ; k++)
+      for (int i = 0; i < SZ; i++)
+        for (int j = 0; j < SZ; j++)
+          (c.m[i][j]+=a.m[i][k]*b.m[k][j])%=oo;
+    return c;
+  }
+  friend matrix operator ^(matrix e, int k) {
+    matrix tmp = matrix(1);
+    while(k) {
+      if (k&1) tmp = tmp*e;
+      k>>=1;
+      e=e*e;
+    }
+    return tmp;
+  }
+};
+
+matrix per;
+
+ll p,q;
+int n, mm, d, k;
+int m[maxn];
+
+int main()
+{
+  cout << "!!!" << endl;
+  #ifndef ONLINE_JUDGE
+  freopen("data.in", "r", stdin);
+  #endif
+  while(scanf("%d%d%d%d", &n,&mm,&d,&k) == 4)
+  {
+    for (int i = 0; i < n; i++)
+      scanf("%d", &m[i]);
+    SZ = n;
+    per.clear();
+    for (int i = 0; i < n; i++)
+    {
+      for (int x = -d; x <= d; x++)
+      {
+        p = (i+x+n)%n;
+        per.m[i][p] = 1;
+      }
+    }
+    oo = mm;
+    per = per^k;
+    for (int i = 0; i < n; i++)
+    {
+      ll tmp = 0;
+      for (int j = 0; j < n; j++)
+      {
+        tmp = (tmp+per.m[i][j]*m[j])%oo;
+      }
+      printf("%I64d%c", tmp, i==n-1? '\n':' ');
+    }
+  }
+  return 0;
+}
+

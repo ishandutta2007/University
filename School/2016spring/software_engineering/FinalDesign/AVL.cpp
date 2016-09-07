@@ -8,7 +8,11 @@ public:
       int data, height;
       int pos;
       Node *lson, *rson;
-      void show() { printf("%d(%d,%d):|%d|\n", data, lson? lson->data:-1,rson? rson->data:-1, height); }
+      // void show() { printf("%d(%d,%d):|%d|\n", data, lson? lson->data:-1,rson? rson->data:-1, height); }
+      void show()
+      {
+        printf("(%d : %d)\n", data, pos);
+      }
       Node(){}
       Node(int d, int he, int pos):data(d),height(he),pos(pos),lson(NULL),rson(NULL){}
       Node(int d, int pos):data(d),height(1),pos(pos),lson(NULL),rson(NULL){}

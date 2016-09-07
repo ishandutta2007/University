@@ -20,7 +20,6 @@ struct ST
       high[i][j] = max(high[i][j - 1], high[i + (1 << (j - 1))][j - 1]);
       low[i][j] = min(low[i][j - 1], low[i + (1 << (j - 1))][j - 1]);
     }
-
   }
   void init()
   {

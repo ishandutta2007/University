@@ -1,27 +1,20 @@
-#define maxn 50020
-struct BIT{
-  int c[maxn];
-  int n;
-  void clear(int n){
-    memset(c, 0, sizeof(c));
-    this->n = n;
+struct bit
+{
+  int s[4200000];
+  int num;
+  void add(int x, int z)
+  {
+    for (int i=x;i<=num;i+=(i&-i)) s[i]+=z;
   }
-  inline int lowbit(int x){
-    return x & (-x);
+  int ask(int x)
+  {
+    int tmp=0;
+    for (int i=x;i;i-=(i&-i)) tmp+=s[i];
+    return tmp;
   }
-  void add(int pos, int delta){
-    printf("n = %d\n", n);
-    while(pos < maxn){
-      c[pos] += delta;
-      pos += lowbit(pos);
-    }
-  }
-  int getsum(int pos){
-    int ans = 0;
-    while(pos > 0){
-      ans += c[pos];
-      pos -= lowbit(pos);
-    }
-    return ans;
+  void clear(int n)
+  {
+    num=n;
+    memset(s,0,sizeof(s));
   }
 }bit;

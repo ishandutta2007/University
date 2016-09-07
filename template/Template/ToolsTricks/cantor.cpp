@@ -1,6 +1,7 @@
 /*
  *  康拓展开
  *  元素个数 len
+ *  元素0-9
  *  0-based count
  *  last edit : 2015/9/25
  */
@@ -25,7 +26,7 @@ void cantorrev(int* a,int d, int len)
     tmp = d / fact[len-i-1];
     d %= fact[len-i-1];
     //the min
-    tt = 1;
+    tt = 0;
     while(tmp || vis[tt])
     {
       if(vis[tt] == 0)

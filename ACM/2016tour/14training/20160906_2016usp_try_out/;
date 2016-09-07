@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#define X first
+#define Y second
+
+using namespace std;
+const int maxn = 1e4+10;
+const int oo = 1e9+7;
+
+typedef long long ll;
+
+int n, m;
+int de[maxn];
+vector<int> G[maxn];
+int del[maxn];
+int vis[maxn];
+int set<int> gra;
+
+void solve()
+{
+  int p1, p2;
+  int fd = 0;
+  for (int u : gra) if (de[u]%2 == 0)
+  {
+    if (de[u] == 0)
+    {
+      gra.erase(u);
+      return;
+    }
+    for (int v : G[u]) if (gra.count(v) && de[v]%2==0)
+    {
+      p1 = u, p2 = v;
+      fd = 1;
+      break;
+    }
+    if (fd) break;
+  }
+  
+
+  
+
+}
+
+int main()
+{
+  scanf("%d%d", &n, &m);
+
+  for (int i = 1; i <= n; i++)
+    gra.insert(i);
+
+  for (int i = 0; i < m; i++)
+  {
+    scanf("%d%d", &u,&v);
+    G[u].push_back(v);
+    G[v].push_back(u);
+    de[u]++;
+    de[v]++;
+  }
+  for (int k = 0; k < n; k++)
+  {
+    solve();
+  }
+  return 0;
+}

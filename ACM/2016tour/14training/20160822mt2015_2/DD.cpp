@@ -1,0 +1,119 @@
+#include <bits/stdc++.h>
+#define X first
+#define Y second
+
+using namespace std;
+
+typedef long long ll;
+typedef pair<int, int> pii;
+
+const int maxn = 100020;
+
+int n, k, L;
+ll ans = 0;
+ll mid;
+int pos[maxn], tot;
+
+ll clockcost[maxn];
+ll countercost[maxn];
+deque<int> Q;
+
+void preclock()
+{
+  Q.clear();
+  Q.push_back(0);
+  for (int i = 1; i <= n; i++)
+  {
+    while(!Q.empty() && Q[0] + k < i) Q.pop_front();
+    if (!Q.empty()) clockcost[i] = clockcost[Q[0]];
+    else clockcost[i] = 0;
+    //printf("%d %d\n", i, clockcost[i]);
+    clockcost[i] += pos[i] * 2;
+    while(!Q.empty() && clockcost[Q.back()] >= clockcost[i])
+      Q.pop_back();
+    Q.push_back(i);
+  }
+}
+
+void precounter()
+{
+  Q.clear();
+  Q.push_back(n+1);
+  for (int i = n; i >= 1; i--)
+  {
+    while(!Q.empty() && Q[0] - k > i) Q.pop_front();
+    if (!Q.empty()) countercost[i] = countercost[Q[0]];
+    else countercost[i] = 0;
+    //printf("%d %d\n", i, countercost[i]);
+    countercost[i] += (L -pos[i]) * 2;
+    while(!Q.empty() && countercost[Q.back()] >= countercost[i])
+      Q.pop_back();
+    Q.push_back(i);
+  }
+}
+
+ll solve(int x)
+{
+  ll ret = clockcost[x-1] + countercost[x];
+
+  if (x+k <= n)
+    ret = min(ret, clockcost[x-1] + countercost[x+k] + L);
+  else
+    ret = min(ret, clockcost[x-1] + L);
+  return ret;
+}
+
+int main()
+{
+  #ifndef ONLINE_JUDGE
+  freopen("data.in", "r", stdin);
+  #endif
+  int T;
+  ll baseans;
+  scanf("%d", &T);
+  while(T--)
+  {
+    scanf("%d%d%d", &L, &n, &k);
+    tot = 0;
+    baseans = 0;
+    int tp, tt;
+    for (int i = 0; i < n; i++)
+    {
+      scanf("%d%d", &tp, &tt);
+      if (tt >= k)
+      {
+        baseans += (ll)tt/k * min(L-tp, tp)*2;
+        tt %= k;
+      }
+      for (int j = 0; j < tt; j++)
+        pos[++tot] = tp;
+    }
+    n = tot;
+    sort(pos+1, pos+n+1);
+    memset(clockcost, 0, sizeof(clockcost));
+    memset(countercost, 0, sizeof(countercost));
+    preclock();
+    precounter();
+    /*
+    for (int i = 0; i <= n+1; i++)
+      printf("%d ", clockcost[i]);
+    printf("\n");
+    for (int i = 0; i <= n+1; i++)
+      printf("%d ", countercost[i]);
+    */
+    ans = min(clockcost[n], countercost[1]);
+
+
+    for (int i = 1; i <= n; i++)
+    {
+      ans = min(ans, solve(i));
+    }
+
+    //printf("base : %I64d\n", baseans);
+
+    ans += baseans;
+    printf("%I64d\n", ans);
+  }
+  return 0;
+}
+

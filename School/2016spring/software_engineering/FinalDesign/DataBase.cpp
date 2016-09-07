@@ -5,7 +5,7 @@ using namespace std;
 
 char str1[100], str2[100];
 int Id;
-const int DATA_WIDTH = 7;
+const int DATA_WIDTH = 8;
 AVL::Node *ptr;
 
 AVL avl;
@@ -57,15 +57,17 @@ int readById()
   return ptr == NULL? -1:ptr->pos;
 }
 
-void printData(int pos, FILE *fp)
+void printData(int pos)
 {
+  FILE *fp = fopen("a.data", "r");
+  printf("[%d]\n",pos);
   fseek(fp, pos * DATA_WIDTH, 0);
   fscanf(fp, "%d %s %s", &Id, str1, str2);
   printf("%d %s %s\n", Id, str1, str2);
+  fclose(fp);
 }
 int searchdata()
 {
-  FILE *fp = fopen("a.data", "r");
   int pos =  readById();
   if (pos == -1)
   {
@@ -75,9 +77,8 @@ int searchdata()
   else
   {
     printf("data found!\n");
-    printData(pos, fp);
+    printData(pos);
   }
-  fclose(fp);
   return pos;
 }
 
@@ -88,27 +89,72 @@ void insertdata()
   scanf("%d %s %s", &Id, str1, str2);
   fprintf(fp, "%d %s %s\n", Id, str1, str2);
   avl.insert(avl.root, Id, tot++);
+  fclose(fp);
   printf("Insert data successful\n");
 }
 
 void deletedata()
 {
+  int delid;
   int delpos;
-  delpos = searchdata();
-  if (delpos == -1) return;
+  printf("input id\n");
+  scanf("%d", &delid);
+  ptr = avl.search(avl.root, delid);
+  if (ptr == NULL)
+  {
+    printf("no data found\n");
+    return;
+  }
+  delpos = ptr->pos;
+  // avl.del_data(delid);
+  FILE *fp, *fswap;
+  fp = fopen("a.data", "r");
+  fswap = fopen("a.swap", "w");
+  int tmpid;
+  char tmpstr1[100], tmpstr2[100];
+  fseek(fp, (tot-1) * DATA_WIDTH, 0);
+  fscanf(fp, "%d %s %s", &tmpid, tmpstr1, tmpstr2);
 
-  printf("Sorry , the delete operation is not completed yet!!\n");
-  
+  fseek(fp, 0, 0);
+  for (int i = 0; i < tot; i++)
+  {
+    fscanf(fp, "%d %s %s", &Id, str1, str2);
+    if (i == delpos)
+    {
+      fprintf(fswap, "%d %s %s\n", tmpid, tmpstr1, tmpstr2);
+      avl.del_data(tmpid);
+      avl.insert(avl.root, tmpid, i);
+    }
+    else
+    {
+      fprintf(fswap, "%d %s %s\n", Id, str1, str2);
+    }
+  }
+  avl.del_data(delid);
+  tot--;
+  fclose(fp);
+  fclose(fswap);
+  fp = fopen("a.data", "w");
+  fswap = fopen("a.swap", "r");
+  for (int i = 0; i < tot; i++)
+  {
+    fscanf(fswap, "%d %s %s", &Id, str1, str2);
+    fprintf(fp, "%d %s %s\n", Id, str1, str2);
+  }
+  // printf("Sorry , the delete operation is not completed yet!!\n");
   // find id of the lastpos;
+  fclose(fp);
+  fclose(fswap);
 
+  printf("delete successful\n");
 }
 
-void showData(AVL::Node *&now, FILE *fp)
+void showData(AVL::Node *&now)
 {
   if (now == NULL) return;
-  showData(now->lson, fp);
-  printData(now->pos, fp);
-  showData(now->rson, fp);
+  showData(now->lson);
+  printData(now->pos);
+  showData(now->rson);
 }
 
 void DBoperation()
@@ -136,9 +182,9 @@ void DBoperation()
     }
     else if (cmd[0] == '4')
     {
-      FILE *fp = fopen("a.data", "r");
-      showData(avl.root, fp);
-      fclose(fp);
+      // FILE *fp = fopen("a.data", "r");
+      showData(avl.root);
+      // fclose(fp);
     }
     else if (cmd[0] == '0')
       break;
@@ -174,7 +220,6 @@ void initData()
     fprintf(fp, "%d %s %s\n", Id, str1, str2); 
   }
   fclose(fp);
-  lastid = Id;
   printf("init data successful!!\n");
 }
 
