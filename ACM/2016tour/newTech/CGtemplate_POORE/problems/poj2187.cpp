@@ -2,19 +2,16 @@
 #include <iostream>
 #include <algorithm>
 #include <vector>
-//#include <bits/stdc++.h>
 
 using namespace std;
 
-typedef long long ll;
-//typedef pair<int, int> point;
-const int maxn = 10020;
+const int maxn = 5e4+20;
 struct point
 {
   int x,y;
   point(int x, int y):x(x),y(y){}
   point(){}
-}p[maxn];
+}p[maxn], poly[maxn];
 
 typedef point Point;
 
@@ -38,45 +35,14 @@ point operator - (point a, point b)
   return point (a.x-b.x, a.y-b.y);
 }
 
-int n, s[maxn];
-int top;
-
-bool cmp(point a, point b)
-{
-  int tmp = (a-p[0])^(b-p[0]);
-  int dis1 = (a-p[0])*(a-p[0]);
-  int dis2 = (b-p[0])*(b-p[0]);
-  if (tmp > 0 || (tmp == 0 && dis1 > dis2)) return true;
-  return false;
-}
-
-int graham()
-{
-  for (int i = 0; i < n; i++)
-  {
-    if (p[i].y < p[0].y || (p[i].y == p[0].y && p[i].x < p[0].x))
-      swap(p[i], p[0]);
-  }
-  sort(p+1, p+n, cmp);
-  s[0] = 0;
-  s[1] = 1;
-  top = 1;
-  for (int i = 2; i < n; i++)
-  {
-    // 注意是否包含边上的点
-    // while(top && ((p[i-1]-p[0])^(p[i]-p[0])) <= 0) top--;
-    while(top && ((p[s[top]]-p[s[top-1]])^(p[i]-p[s[top-1]])) < 0) top--;
-    s[++top] = i;
-  }
-  top++;
-  return top;
-}
-
 bool cmpxy(point a, point b)
 {
   if (a.x == b.x) return a.y < b.y;
   return a.x < b.x;
 }
+
+int s[maxn];
+
 // 包含边上的点就将 <= 改为 <
 int convexHull(Point *p, int n)
 {
@@ -95,4 +61,32 @@ int convexHull(Point *p, int n)
   }
   if (n > 1) top--;
   return top;
+}
+
+// s 为保存有序的凸包点的下标的栈
+int rotatingCaliper(Point *p, int top)
+{
+  int q = 1;
+  int ans = 0;
+  s[top] = 0;
+  for (int i = 0; i < top; i++)
+  {
+    while( ((p[s[i+1]]-p[s[i]])^(p[s[q+1]]-p[s[i]])) > 
+           ((p[s[i+1]]-p[s[i]])^(p[s[q]]  -p[s[i]])) )
+      q = (q+1)%top;
+    ans = max(ans, (p[s[i]]-p[s[q]])*(p[s[i]]-p[s[q]]));
+    ans = max(ans, (p[s[i+1]]-p[s[q+1]])*(p[s[i+1]]-p[s[q+1]]));
+  }
+  return ans;
+}
+
+int main()
+{
+  int n;
+  scanf("%d", &n);
+  for (int i = 0; i < n; i++)
+    scanf("%d%d", &p[i].x, &p[i].y);
+  int cnt = convexHull(p, n);
+  printf("%d\n", rotatingCaliper(p, cnt));
+  return 0;
 }
