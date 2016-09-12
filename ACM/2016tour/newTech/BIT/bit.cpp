@@ -1,6 +1,6 @@
 struct bit
 {
-  int s[4200000];
+  int s[maxn];
   int num;
   void add(int x, int z)
   {

@@ -60,7 +60,7 @@ double linePointDist(Point A, Point B, Point C, bool isSeg) {
     double dot2 = (C-A)*(A-B);
     if (dot2 > 0) return sqrt((A-C)*(A-C));
   }
-  return abs(dist);
+  return fabs(dist);
 }
 
 // 判断线段的两个端点是否在直线的两侧
