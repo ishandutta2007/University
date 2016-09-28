@@ -5,14 +5,12 @@
  * second 表示出现的次数
  */
 typedef pair<int,int> pii;
-pii minstr(char *s)
-{
+pii minstr(char *s) {
   int l = strlen(s);
   for (int i = 0; i < l; i++) s[i+l] = s[i];
   s[2*l] = 0;
   int i = 0, j = 1;
-  while(i < l && j < l)
-  {
+  while(i < l && j < l) {
     int k = 0;
     while(s[i+k] == s[j+k] && k < l) k++;
     if (k == l)
@@ -22,14 +20,12 @@ pii minstr(char *s)
   }
   return pii(min(i, j), 1);
 }
-pii maxstr(char *s)
-{
+pii maxstr(char *s) {
   int l = strlen(s);
   for (int i = 0; i < l; i++) s[i+l] = s[i];
   s[2*l] = 0;
   int i = 0, j = 1;
-  while(i < l && j < l)
-  {
+  while(i < l && j < l) {
     int k = 0;
     while(s[i+k] == s[j+k] && k < l) k++;
     if (k == l)

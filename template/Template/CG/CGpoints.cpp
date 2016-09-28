@@ -1,9 +1,3 @@
-#include <bits/stdc++.h>
-#include "CGbasic.cpp"
-#define X first
-#define Y second
-using namespace std;
-
 struct Point {
   double x, y;
   Point(double _x, double _y):x(_x),y(_y){}
@@ -56,9 +50,9 @@ double linePointDist(Point A, Point B, Point C, bool isSeg) {
   double dist = ((B-A)^(C-A)) / sqrt((B-A)*(B-A));
   if (isSeg) {
     double dot1 = (C-B)*(B-A);
-    if (dot1 > 0) return sqrt((B-C)*(B-C));
+    if (dcmp(dot1) > 0) return sqrt((B-C)*(B-C));
     double dot2 = (C-A)*(A-B);
-    if (dot2 > 0) return sqrt((A-C)*(A-C));
+    if (dcmp(dot2) > 0) return sqrt((A-C)*(A-C));
   }
   return fabs(dist);
 }
@@ -95,7 +89,6 @@ bool pointOnSeg(point s1, point s2, point p, bool includeEnd)
     return false;
 }
 
-
 // 判断两条线段是否相交
 // 两次跨立试验
 typedef pair<Point, Point> seg;
@@ -119,28 +112,3 @@ double areaPoly(vector<Point> &P) {
   return area / 2.0;
 }
 
-/*
-#define INPUT
-
-int main()
-{
-  #ifndef INPUT
-  freopen("data.in", "r", stdin);
-  #endif
-  vector<Point> P;
-  int n;
-  Point a;
-  while(scanf("%d", &n) != EOF)
-  {
-    P.clear();
-    for (int i = 0; i < n; i++)
-    {
-      if(scanf("%lf%lf", &a.x, &a.y) == EOF)
-        return 0;
-      P.push_back(a);
-    }
-    printf("%.6f\n", areaPoly(P));
-  }
-  return 0;
-}
-*/
