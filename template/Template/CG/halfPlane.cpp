@@ -13,6 +13,9 @@ struct Line {
 bool onLeft(Line L, Point p) {
   return (L.v^(p-L.p)) > 0;
 }
+
+
+// 注意需要重载 点 与 小数的乘法
 Point lineIntersection(Line a, Line b) {
   Point u = a.p-b.p;
   double t = (b.v^u)/(a.v^b.v);
