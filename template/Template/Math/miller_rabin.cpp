@@ -4,6 +4,7 @@ LL witness(LL a,LL b,LL c)
   LL x,y,t=0;
   while((b&1)==0)
     b>>=1,t++;
+  // pow_mod() 可能需要慢速乘
   y=x=pow_mod(a,b,c);
   // 二次探测
   while(t--)
